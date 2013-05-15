@@ -3,7 +3,8 @@ require 'bcrypt'
 class User < ActiveRecord::Base
 
   include BCrypt
-
+  has_many :urls
+  
   validates :email, :presence => true, :format => {:with =>  /\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3}/}, 
             :uniqueness => true
   validates :password, :presence => true

@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Welcome to your private page of shortened urls!!!</h1>
+  
+  
+
+  <% if @new_shorty && @new_shorty.errors.any? %>
+    <% @new_shorty.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  <% end %>
+
+  <form id ="shorten_url" action="/shorten" method="post">
+    <h3>URL:</h3>
+    
+    <input type="text" name="url" placeholder="Enter url here!">
+    <br><br>
+    <input type="submit" value="Shorten URL">
+  </form>
+
+  <hr>
+
+  <ul>
+  <% Url.where(:user_id => session[:user_id]).each do |url| %>
+    <li>Original: <%= "#{url.url}" %>, Shorty: <a class="shorty" href="/shorty/<%= "#{url.code}" %>" target="_blank"><%= "/shorty/#{url.code}"%></a> Clicks: <%= "#{url.clicks}" %></li>
+  <% end %>
+  </ul>
+
+  <p><a href="/logout">Logout</a></p>
+</div>
