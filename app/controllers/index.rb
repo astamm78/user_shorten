@@ -67,7 +67,14 @@ post '/shorten' do
 end
 
 get '/shorty/:code' do
-  link = Url.find_by_code("#{params[:code]}") 
-  link.increment(:clicks).save
+  link = Url.find_by_code("#{params[:code]}")
+  # link.increment(:clicks).save
   redirect link.url
 end
+
+post '/shorty/:code' do
+  link = Url.find_by_code("#{params[:code]}")
+  link.increment(:clicks).save
+  return link.clicks.to_s
+end
+

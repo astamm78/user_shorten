@@ -21,7 +21,11 @@
 
   <ul>
   <% Url.where(:user_id => session[:user_id]).each do |url| %>
-    <li>Original: <%= "#{url.url}" %>, Shorty: <a class="shorty" href="/shorty/<%= "#{url.code}" %>" target="_blank"><%= "/shorty/#{url.code}"%></a> Clicks: <%= "#{url.clicks}" %></li>
+    <li>
+        Original: <%= "#{url.url}" %>,
+        Shorty: <a class="shorty" href="/shorty/<%= "#{url.code}" %>" target="_blank" ><%= "/shorty/#{url.code}" %></a>,
+        Clicks: <span class="click_count"><%= "#{url.clicks}" %></span>
+    </li>
   <% end %>
   </ul>
 
